@@ -1,0 +1,80 @@
+<div class="card">
+    <div class="table-responsive custom-scrollbar">
+        <div class="card-body">
+            <form>
+                <div class="d-flex justify-content-between p-2">
+                    <div class="dataTables_length">
+                        <select class="form-select" style="width: auto" [(ngModel)]="service.pageSize" (change)="getStartingIndex()">
+                            <option [value]="10">10</option>
+                            <option [value]="20">20</option>
+                            <option [value]="30">30</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="table-complete-search" class="col-form-label">Recherche :</label>
+                        <div class="col">
+                            <input
+                                    id="table-complete-search"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="service.searchTerm"
+                                    (input)="getStartingIndex()"
+                                    autocomplete="off"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" >Nom</th>
+                        <th scope="col" >Localisation</th>
+                        <th scope="col" >Contact</th>
+                        <th scope="col" sortable="email" (sort)="onSort($event)">Email</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let entreprise of filteredData; let i = index">
+                        <th scope="row">{{ getStartingIndex() + i }}</th>
+                        <td>
+                            <ngb-highlight [result]="entreprise.nom" [term]="service.searchTerm"></ngb-highlight>
+                        </td>
+                        <td>
+                            <ngb-highlight [result]="entreprise.localisation" [term]="service.searchTerm"></ngb-highlight>
+                        </td>
+                        <td>
+                            <ngb-highlight [result]="entreprise.contact" [term]="service.searchTerm"></ngb-highlight>
+                        </td>
+                        <td>
+                            <ngb-highlight [result]="entreprise.email" [term]="service.searchTerm"></ngb-highlight>
+                        </td>
+                        <td>
+                            <ul class="action">
+                                <i class="fa fa-eye font-primary pe-2"></i>
+                                <i class="fa fa-trash font-danger pe-2 ps-2"></i>
+                                <i class="fa fa-pencil font-warning ps-2"></i>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr *ngIf="filteredData.length === 0">
+                        <td colspan="6" class="text-center">Aucune entreprise trouvée.</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between p-2">
+                    <div>
+                        Affichage {{ getStartingIndex() }} à {{ getEndingIndex() }} sur {{ filteredData.length }} entreprises.
+                    </div>
+                    <ngb-pagination
+                            [(page)]="service.page"
+                            [pageSize]="service.pageSize"
+                            [collectionSize]="filteredData.length"
+                            (pageChange)="getStartingIndex()"
+                    ></ngb-pagination>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

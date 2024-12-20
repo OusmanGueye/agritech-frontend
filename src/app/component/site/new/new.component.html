@@ -1,0 +1,111 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer un nouveau site</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': siteForm.get('nom')?.invalid && siteForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Référence -->
+                <div class="mb-3 col-md-6">
+                    <label for="reference" class="form-label">Référence</label>
+                    <input
+                            id="reference"
+                            type="text"
+                            class="form-control"
+                            formControlName="reference"
+                            [ngClass]="{ 'is-invalid': siteForm.get('reference')?.invalid && siteForm.get('reference')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Localisation -->
+                <div class="mb-3 col-md-6">
+                    <label for="localisation" class="form-label">Localisation</label>
+                    <input id="localisation" type="text" class="form-control" formControlName="localisation" />
+                </div>
+
+                <!-- Type de site -->
+                <div class="mb-3 col-md-6">
+                    <label for="typeSite" class="form-label">Type de Site</label>
+                    <select
+                            id="typeSite"
+                            class="form-select"
+                            formControlName="typeSite"
+                            [ngClass]="{ 'is-invalid': siteForm.get('typeSite')?.invalid && siteForm.get('typeSite')?.touched }"
+                    >
+                        <option [value]="null" disabled selected>Sélectionnez un type de site</option>
+                        <option *ngFor="let type of typeSites" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Latitude -->
+                <div class="mb-3 col-md-6">
+                    <label for="latitude" class="form-label">Latitude</label>
+                    <input
+                            id="latitude"
+                            type="number"
+                            class="form-control"
+                            formControlName="latitude"
+                            [ngClass]="{ 'is-invalid': siteForm.get('latitude')?.invalid && siteForm.get('latitude')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez une latitude entre -90 et 90.</div>
+                </div>
+
+                <!-- Longitude -->
+                <div class="mb-3 col-md-6">
+                    <label for="longitude" class="form-label">Longitude</label>
+                    <input
+                            id="longitude"
+                            type="number"
+                            class="form-control"
+                            formControlName="longitude"
+                            [ngClass]="{ 'is-invalid': siteForm.get('longitude')?.invalid && siteForm.get('longitude')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez une longitude entre -180 et 180.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Est supprimé -->
+<!--                <div class="mb-3 col-md-6">-->
+<!--                    <div class="form-check">-->
+<!--                        <input id="isDelete" type="checkbox" class="form-check-input" formControlName="isDelete" />-->
+<!--                        <label for="isDelete" class="form-check-label">Est supprimé</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Disponible &ndash;&gt;-->
+<!--                <div class="mb-3 col-md-6">-->
+<!--                    <div class="form-check">-->
+<!--                        <input id="isDisponible" type="checkbox" class="form-check-input" formControlName="isDisponible" />-->
+<!--                        <label for="isDisponible" class="form-check-label">Disponible</label>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

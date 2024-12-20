@@ -7,6 +7,8 @@ import { catchError, shareReplay, tap } from 'rxjs/operators';
 import { ApplicationConfigService } from '../config/application-config.service';
 import {Account} from "./account.model";
 import {StateStorageService} from "./state-storage.service";
+import {Authority} from "../../config/authority.constants";
+import {AdminService} from "../../component/admin/service/admin.service";
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -16,6 +18,7 @@ export class AccountService {
 
   private readonly http = inject(HttpClient);
   private readonly stateStorageService = inject(StateStorageService);
+  private readonly adminService = inject(AdminService);
   private readonly router = inject(Router);
   private readonly applicationConfigService = inject(ApplicationConfigService);
 
@@ -51,6 +54,17 @@ export class AccountService {
       this.accountCache$ = this.fetch().pipe(
         tap((account: Account) => {
           this.authenticate(account);
+
+          this.stateStorageService.storeData('login', account.login);
+
+          // on vérifie si l'utilisateur est un admin
+            if (this.hasAnyAuthority(Authority.ADMIN)) {
+                // on récupère de l'entreprise de l'admin
+                this.adminService.getAdminByTelephone(account.login).subscribe(admin => {
+                  this.stateStorageService.storeData('entrepriseId', admin.body?.entreprise?.id);
+                  this.stateStorageService.storeData('adminNomComplet', admin.body?.nomComplet);
+                });
+            }
 
           this.navigateToStoredUrl();
         }),

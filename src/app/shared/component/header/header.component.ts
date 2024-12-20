@@ -31,6 +31,7 @@ export class HeaderComponent {
   public searchResultEmpty: boolean = false;
   public text: string = '';
   public open = false;
+  public adminNomComplet: string = localStorage.getItem('adminNomComplet') || 'Ousmane Gueye';
 
   constructor(public hidenav: HideNavScrollService, public navmenu: NavmenuService) {
     this.navmenu.item.subscribe((menuItems: Menu[]) =>

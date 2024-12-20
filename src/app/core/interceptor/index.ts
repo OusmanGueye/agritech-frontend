@@ -3,6 +3,7 @@ import {AuthInterceptor} from "./auth.interceptor";
 import {AuthExpiredInterceptor} from "./auth-expired.interceptor";
 import {ErrorHandlerInterceptor} from "./error-handler.interceptor";
 import {NotificationInterceptor} from "./notification.interceptor";
+import {EntrepriseIdInterceptor} from "./entreprise-Id.Interceptor";
 
 
 export const httpInterceptorProviders = [
@@ -26,4 +27,9 @@ export const httpInterceptorProviders = [
     useClass: NotificationInterceptor,
     multi: true,
   },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: EntrepriseIdInterceptor,
+    multi: true,
+  }
 ];

@@ -1,0 +1,21 @@
+export enum TypeObservation {
+  PESTE = 'PESTE',
+
+  MALADIE = 'MALADIE',
+
+  MAUVAISE_HERBE = 'MAUVAISE_HERBE',
+
+  AUTRE = 'AUTRE',
+
+  CAPTEUR = 'CAPTEUR',
+
+  CLIMAT = 'CLIMAT',
+
+  SOL = 'SOL',
+
+  CULTURE = 'CULTURE',
+
+  PARCELLE = 'PARCELLE',
+
+  SITE = 'SITE',
+}

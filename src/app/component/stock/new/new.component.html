@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer un nouveau stock</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': stockForm.get('nom')?.invalid && stockForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Emplacement -->
+                <div class="mb-3 col-md-6">
+                    <label for="emplacement" class="form-label">Emplacement</label>
+                    <input
+                            id="emplacement"
+                            type="text"
+                            class="form-control"
+                            formControlName="emplacement"
+                            [ngClass]="{ 'is-invalid': stockForm.get('emplacement')?.invalid && stockForm.get('emplacement')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Capacité -->
+                <div class="mb-3 col-md-6">
+                    <label for="capacite" class="form-label">Capacité</label>
+                    <input
+                            id="capacite"
+                            type="number"
+                            class="form-control"
+                            formControlName="capacite"
+                            [ngClass]="{ 'is-invalid': stockForm.get('capacite')?.invalid && stockForm.get('capacite')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez une capacité valide (au moins 1).</div>
+                </div>
+
+                <!-- Site -->
+                <div class="mb-3 col-md-6">
+                    <label for="siteId" class="form-label">Site</label>
+                    <ng-select
+                            [multiple]="false"
+                            [items]="sites"
+                            bindLabel="nom"
+                            bindValue="id"
+                            placeholder="Sélectionnez un site"
+                            formControlName="siteId"
+                            [ngClass]="{ 'is-invalid': stockForm.get('siteId')?.invalid && stockForm.get('siteId')?.touched }"
+                    >
+                    </ng-select>
+                    <div class="invalid-feedback">Veuillez sélectionner un site.</div>
+                </div>
+            </div>
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

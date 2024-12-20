@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer une nouvelle parcelle</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="parcelleForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': parcelleForm.get('nom')?.invalid && parcelleForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Numéro -->
+                <div class="mb-3 col-md-6">
+                    <label for="numero" class="form-label">Numéro</label>
+                    <input
+                            id="numero"
+                            type="number"
+                            class="form-control"
+                            formControlName="numero"
+                            [ngClass]="{ 'is-invalid': parcelleForm.get('numero')?.invalid && parcelleForm.get('numero')?.touched }"
+                    />
+                    <div class="invalid-feedback">Le numéro doit être supérieur ou égal à 1.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Superficie -->
+                <div class="mb-3 col-md-6">
+                    <label for="superficie" class="form-label">Superficie (en m²)</label>
+                    <input
+                            id="superficie"
+                            type="number"
+                            class="form-control"
+                            formControlName="superficie"
+                            [ngClass]="{ 'is-invalid': parcelleForm.get('superficie')?.invalid && parcelleForm.get('superficie')?.touched }"
+                    />
+                    <div class="invalid-feedback">La superficie doit être supérieure à 0.</div>
+                </div>
+
+                <!-- Type de sol -->
+                <div class="mb-3 col-md-6">
+                    <label for="typeSol" class="form-label">Type de sol</label>
+                    <select
+                            id="typeSol"
+                            class="form-select"
+                            formControlName="typeSol"
+                            [ngClass]="{ 'is-invalid': parcelleForm.get('typeSol')?.invalid && parcelleForm.get('typeSol')?.touched }"
+                    >
+                        <option value="">-- Sélectionner un type de sol --</option>
+                        <option *ngFor="let type of typeSolOptions" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="invalid-feedback">Veuillez sélectionner un type de sol.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Site -->
+                <div class="mb-3 col-md-12">
+                    <label for="siteId" class="form-label">Site</label>
+                    <ng-select
+                            [items]="sites"
+                            bindLabel="nom"
+                            bindValue="id"
+                            placeholder="-- Sélectionner un site --"
+                            formControlName="siteId"
+                            [ngClass]="{ 'is-invalid': parcelleForm.get('siteId')?.invalid && parcelleForm.get('siteId')?.touched }"
+                    ></ng-select>
+                    <div class="invalid-feedback">Veuillez sélectionner un site.</div>
+                </div>
+            </div>
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

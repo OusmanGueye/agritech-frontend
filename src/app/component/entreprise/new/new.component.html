@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Ajouter une entreprise</h4>
+        <p class="f-m-light mt-1">
+            Remplissez les champs ci-dessous pour ajouter une nouvelle entreprise. Les champs marqués d'un <span class="text-danger">*</span> sont obligatoires.
+        </p>
+    </div>
+    <div class="card-body">
+        <form
+                class="row g-3 needs-validation custom-input"
+                novalidate
+                [ngClass]="{ 'was-validated': validate }"
+                (ngSubmit)="onSubmit()"
+                [formGroup]="entrepriseForm"
+        >
+            <!-- Nom -->
+            <div class="col-md-6 position-relative">
+                <label class="form-label" for="nom">Nom <span class="text-danger">*</span></label>
+                <input
+                        class="form-control"
+                        id="nom"
+                        type="text"
+                        placeholder="Nom de l'entreprise"
+                        formControlName="nom"
+                        required
+                />
+                <div class="valid-tooltip">Parfait !</div>
+                <div *ngIf="entrepriseForm.get('nom')?.invalid && entrepriseForm.get('nom')?.touched" class="invalid-tooltip">
+                    Le nom est obligatoire.
+                </div>
+            </div>
+
+            <!-- Localisation -->
+            <div class="col-md-6 position-relative">
+                <label class="form-label" for="localisation">Localisation <span class="text-danger">*</span></label>
+                <input
+                        class="form-control"
+                        id="localisation"
+                        type="text"
+                        placeholder="Adresse ou ville"
+                        formControlName="localisation"
+                        required
+                />
+                <div class="valid-tooltip">Parfait !</div>
+                <div *ngIf="entrepriseForm.get('localisation')?.invalid && entrepriseForm.get('localisation')?.touched" class="invalid-tooltip">
+                    La localisation est obligatoire.
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-6 position-relative">
+                <label class="form-label" for="contact">Contact <span class="text-danger">*</span></label>
+                <input
+                        class="form-control"
+                        id="contact"
+                        type="text"
+                        placeholder="Téléphone ou mobile"
+                        formControlName="contact"
+                        required
+                />
+                <div class="valid-tooltip">Parfait !</div>
+                <div *ngIf="entrepriseForm.get('contact')?.invalid && entrepriseForm.get('contact')?.touched" class="invalid-tooltip">
+                    Le contact est obligatoire et doit être valide.
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 position-relative">
+                <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
+                <input
+                        class="form-control"
+                        id="email"
+                        type="email"
+                        placeholder="Adresse email"
+                        formControlName="email"
+                        required
+                />
+                <div class="valid-tooltip">Parfait !</div>
+                <div *ngIf="entrepriseForm.get('email')?.invalid && entrepriseForm.get('email')?.touched" class="invalid-tooltip">
+                    Une adresse email valide est requise.
+                </div>
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="col-12">
+                <button
+                        class="btn btn-primary"
+                        type="submit"
+                        [disabled]="entrepriseForm.invalid || isSubmitting"
+                >
+                    Ajouter
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

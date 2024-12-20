@@ -7,6 +7,7 @@ import {ApplicationConfigService} from "./core/config/application-config.service
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fontAwesomeIcons} from "./config/font-awesome-icons";
 import {environment} from "../environments/environment.development";
+import locale from '@angular/common/locales/fr';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
   constructor() {
     this.applicationConfigService.setEndpointPrefix(environment.apiUrl);
     this.iconLibrary.addIcons(...fontAwesomeIcons);
+    registerLocaleData(locale);
   }
 
 }

@@ -1,0 +1,91 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer un nouvel Intrant</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="intrantForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': intrantForm.get('nom')?.invalid && intrantForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Type -->
+                <div class="mb-3 col-md-6">
+                    <label for="type" class="form-label">Type</label>
+                    <select
+                            id="type"
+                            class="form-select"
+                            formControlName="type"
+                            [ngClass]="{ 'is-invalid': intrantForm.get('type')?.invalid && intrantForm.get('type')?.touched }"
+                    >
+                        <option value="">-- Choisir un type --</option>
+                        <option *ngFor="let type of intrantTypes" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Quantité -->
+                <div class="mb-3 col-md-6">
+                    <label for="quantite" class="form-label">Quantité</label>
+                    <input
+                            id="quantite"
+                            type="number"
+                            class="form-control"
+                            formControlName="quantite"
+                            [ngClass]="{ 'is-invalid': intrantForm.get('quantite')?.invalid && intrantForm.get('quantite')?.touched }"
+                    />
+                    <div class="invalid-feedback">La quantité doit être supérieure à 0.</div>
+                </div>
+
+                <!-- Date d'expiration -->
+                <div class="mb-3 col-md-6">
+                    <label for="dateExpiration" class="form-label">Date d'expiration</label>
+                    <input
+                            id="dateExpiration"
+                            type="date"
+                            class="form-control"
+                            formControlName="dateExpiration"
+                            [ngClass]="{ 'is-invalid': intrantForm.get('dateExpiration')?.invalid && intrantForm.get('dateExpiration')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Stock -->
+                <div class="mb-3 col-md-12">
+                    <label for="stockId" class="form-label">Stock</label>
+                    <ng-select
+                            id="stockId"
+                            [items]="stocks"
+                            bindLabel="nom"
+                            bindValue="id"
+                            placeholder="-- Sélectionner un stock --"
+                            formControlName="stockId"
+                            [ngClass]="{ 'is-invalid': intrantForm.get('stockId')?.invalid && intrantForm.get('stockId')?.touched }"
+                    >
+                    </ng-select>
+                    <div class="invalid-feedback">Veuillez sélectionner un stock.</div>
+                </div>
+            </div>
+
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

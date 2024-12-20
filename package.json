@@ -41,6 +41,7 @@
     "calendar-utils": "^0.10.4",
     "crypto-browserify": "^3.12.1",
     "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
     "dropzone": "^6.0.0-beta.2",
     "feather-icons": "^4.29.2",
     "leaflet": "^1.9.4",

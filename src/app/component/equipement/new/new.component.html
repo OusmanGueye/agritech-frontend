@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer un nouvel équipement</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="equipementForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': equipementForm.get('nom')?.invalid && equipementForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Type -->
+                <div class="mb-3 col-md-6">
+                    <label for="type" class="form-label">Type</label>
+                    <select
+                            id="type"
+                            class="form-select"
+                            formControlName="type"
+                            [ngClass]="{ 'is-invalid': equipementForm.get('type')?.invalid && equipementForm.get('type')?.touched }"
+                    >
+                        <option value="">-- Choisir un type --</option>
+                        <option *ngFor="let type of typeEquipements" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- État -->
+                <div class="mb-3 col-md-6">
+                    <label for="etat" class="form-label">État</label>
+                    <input
+                            id="etat"
+                            type="text"
+                            class="form-control"
+                            formControlName="etat"
+                            [ngClass]="{ 'is-invalid': equipementForm.get('etat')?.invalid && equipementForm.get('etat')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez un état valide.</div>
+                </div>
+
+                <!-- Site -->
+                <div class="mb-3 col-md-6">
+                    <label for="siteId" class="form-label">Site</label>
+                    <ng-select
+                            [items]="sites"
+                            bindLabel="nom"
+                            bindValue="id"
+                            placeholder="Sélectionnez un site"
+                            formControlName="siteId"
+                            [ngClass]="{ 'is-invalid': equipementForm.get('siteId')?.invalid && equipementForm.get('siteId')?.touched }"
+                    ></ng-select>
+                    <div class="invalid-feedback">Veuillez sélectionner un site.</div>
+                </div>
+            </div>
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -13,6 +13,7 @@ import { FeathericonComponent } from '../../feathericon/feathericon.component';
 export class ProfileComponent {
 
   public show: boolean = false;
+  public adminNomComplet: string = localStorage.getItem('adminNomComplet') || 'Ousmane Gueye';
 
   constructor(private router: Router) { }
 

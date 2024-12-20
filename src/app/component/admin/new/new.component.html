@@ -1,0 +1,138 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer un nouvel administrateur</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Prénom -->
+                <div class="mb-3 col-md-6">
+                    <label for="firstName" class="form-label">Prénom</label>
+                    <input
+                            id="firstName"
+                            type="text"
+                            class="form-control"
+                            formControlName="firstName"
+                            [ngClass]="{ 'is-invalid': adminForm.get('firstName')?.invalid && adminForm.get('firstName')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="lastName" class="form-label">Nom</label>
+                    <input
+                            id="lastName"
+                            type="text"
+                            class="form-control"
+                            formControlName="lastName"
+                            [ngClass]="{ 'is-invalid': adminForm.get('lastName')?.invalid && adminForm.get('lastName')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Adresse -->
+                <div class="mb-3 col-md-6">
+                    <label for="address" class="form-label">Adresse</label>
+                    <input id="address" type="text" class="form-control" formControlName="address" />
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3 col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                            id="email"
+                            type="email"
+                            class="form-control"
+                            formControlName="email"
+                            [ngClass]="{ 'is-invalid': adminForm.get('email')?.invalid && adminForm.get('email')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez une adresse email valide.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Téléphone -->
+                <div class="mb-3 col-md-6">
+                    <label for="telephone" class="form-label">Téléphone</label>
+                    <input
+                            id="telephone"
+                            type="text"
+                            class="form-control"
+                            formControlName="telephone"
+                            [ngClass]="{ 'is-invalid': adminForm.get('telephone')?.invalid && adminForm.get('telephone')?.touched }"
+                    />
+                    <div class="invalid-feedback">Entrez un numéro de téléphone valide.</div>
+                </div>
+
+                <!-- Sexe -->
+                <div class="mb-3 col-md-6">
+                    <label for="sexe" class="form-label">Sexe</label>
+                    <select
+                            id="sexe"
+                            class="form-select"
+                            formControlName="sexe"
+                            [ngClass]="{ 'is-invalid': adminForm.get('sexe')?.invalid && adminForm.get('sexe')?.touched }"
+                    >
+                        <option [value]="null">Sélectionnez un sexe</option>
+                        <option *ngFor="let sexe of sexes" [value]="sexe">{{ sexe }}</option>
+                    </select>
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Entreprise -->
+                <div class="mb-3 col-md-6">
+                    <label for="entrepriseId" class="form-label">Entreprise</label>
+                    <select
+                            id="entrepriseId"
+                            class="form-select"
+                            formControlName="entrepriseId"
+                            [ngClass]="{ 'is-invalid': adminForm.get('entrepriseId')?.invalid && adminForm.get('entrepriseId')?.touched }"
+                    >
+                        <option [value]="null" disabled selected>Sélectionnez une entreprise</option>
+                        <option *ngFor="let entreprise of entreprises" [value]="entreprise.id">
+                            {{ entreprise.nom }}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback">Veuillez sélectionner une entreprise.</div>
+                </div>
+
+                <!-- Photo -->
+                <div class="mb-3 col-md-6">
+                    <label for="image" class="form-label">Photo</label>
+                    <input
+                            id="image"
+                            type="file"
+                            class="form-control"
+                            (change)="onFileChange($event)"
+                            [ngClass]="{ 'is-invalid': !selectedFile }"
+                    />
+                    <div class="invalid-feedback">Veuillez sélectionner une photo.</div>
+                </div>
+
+                <!-- Aperçu de l'image -->
+                <div class="mb-3 col-md-6" *ngIf="imagePreview">
+                    <label class="form-label">Aperçu de la photo</label>
+                    <img
+                            [src]="imagePreview"
+                            alt="Aperçu"
+                            class="img-thumbnail"
+                            style="max-width: 100%; height: auto;"
+                    />
+                </div>
+
+            </div>
+
+            <!-- Bouton de soumission -->
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

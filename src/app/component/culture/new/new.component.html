@@ -1,0 +1,88 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Créer une nouvelle culture</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="cultureForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <!-- Nom -->
+                <div class="mb-3 col-md-6">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                            id="nom"
+                            type="text"
+                            class="form-control"
+                            formControlName="nom"
+                            [ngClass]="{ 'is-invalid': cultureForm.get('nom')?.invalid && cultureForm.get('nom')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Date de semis -->
+                <div class="mb-3 col-md-6">
+                    <label for="dateSemis" class="form-label">Date de semis</label>
+                    <input
+                            id="dateSemis"
+                            type="date"
+                            class="form-control"
+                            formControlName="dateSemis"
+                            [ngClass]="{ 'is-invalid': cultureForm.get('dateSemis')?.invalid && cultureForm.get('dateSemis')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Date de récolte -->
+                <div class="mb-3 col-md-6">
+                    <label for="dateRecolte" class="form-label">Date de récolte</label>
+                    <input
+                            id="dateRecolte"
+                            type="date"
+                            class="form-control"
+                            formControlName="dateRecolte"
+                            [ngClass]="{ 'is-invalid': cultureForm.get('dateRecolte')?.invalid && cultureForm.get('dateRecolte')?.touched }"
+                    />
+                    <div class="invalid-feedback">Ce champ est requis.</div>
+                </div>
+
+                <!-- Type de culture -->
+                <div class="mb-3 col-md-6">
+                    <label for="typeCulture" class="form-label">Type de culture</label>
+                    <select
+                            id="typeCulture"
+                            class="form-select"
+                            formControlName="typeCulture"
+                            [ngClass]="{ 'is-invalid': cultureForm.get('typeCulture')?.invalid && cultureForm.get('typeCulture')?.touched }"
+                    >
+                        <option value="">-- Sélectionner un type de culture --</option>
+                        <option *ngFor="let type of typeCultureOptions" [value]="type">{{ type }}</option>
+                    </select>
+                    <div class="invalid-feedback">Veuillez sélectionner un type de culture.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Parcelle -->
+                <div class="mb-3 col-md-12">
+                    <label for="parcelleId" class="form-label">Parcelle</label>
+                    <ng-select
+                            [items]="parcelles"
+                            bindLabel="nom"
+                            bindValue="id"
+                            placeholder="-- Sélectionner une parcelle --"
+                            formControlName="parcelleId"
+                            [ngClass]="{ 'is-invalid': cultureForm.get('parcelleId')?.invalid && cultureForm.get('parcelleId')?.touched }"
+                    ></ng-select>
+                    <div class="invalid-feedback">Veuillez sélectionner une parcelle.</div>
+                </div>
+            </div>
+
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'En cours...' : 'Créer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -9,6 +9,15 @@ export class StateStorageService {
     sessionStorage.setItem(this.previousUrlKey, JSON.stringify(url));
   }
 
+  storeData(key: string, data: any): void {
+    sessionStorage.setItem(key, JSON.stringify(data));
+  }
+
+  getData(key: string): any {
+    const data = sessionStorage.getItem(key);
+    return data ? (JSON.parse(data) as any) : data;
+  }
+
   getUrl(): string | null {
     const previousUrl = sessionStorage.getItem(this.previousUrlKey);
     return previousUrl ? (JSON.parse(previousUrl) as string | null) : previousUrl;
@@ -36,5 +45,9 @@ export class StateStorageService {
   clearAuthenticationToken(): void {
     sessionStorage.removeItem(this.authenticationKey);
     localStorage.removeItem(this.authenticationKey);
+  }
+
+  getEntrepriseId() {
+    return sessionStorage.getItem('entrepriseId');
   }
 }

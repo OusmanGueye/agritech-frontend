@@ -1,0 +1,11 @@
+export enum TypeEvenement {
+  SEMIS = 'SEMIS',
+
+  FERTILISATION = 'FERTILISATION',
+
+  TRAITEMENT = 'TRAITEMENT',
+
+  OBSERVATION = 'OBSERVATION',
+
+  RECOLTE = 'RECOLTE',
+}
